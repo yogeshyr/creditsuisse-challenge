@@ -1,10 +1,10 @@
 pipeline {
     agent any
     stages {
-        stage ("Test"){
-            steps {
-                sh "pwd"
+        stage('Cloning Git') { 
+            steps { 
+                checkout scm
             }
-        }
+        } 
     }
 }
