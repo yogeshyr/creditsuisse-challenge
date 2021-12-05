@@ -1,3 +1,6 @@
+String jobDescription =
+    '<p>This is test job<p>'
+
 pipeline {
     agent any
     stages {
