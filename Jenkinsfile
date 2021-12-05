@@ -1,8 +1,10 @@
 pipeline {
     agent any
-    stage ("Test"){
-        steps {
-            sh "pwd"
+    stages {
+        stage ("Test"){
+            steps {
+                sh "pwd"
+            }
         }
     }
 }
