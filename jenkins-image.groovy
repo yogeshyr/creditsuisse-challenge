@@ -8,7 +8,7 @@ pipeline {
                 setJobDescription(env.JOB_NAME, jobDescription)
                 rtBuildInfo(captureEnv: true) // Enable traceability (build info) capture
                 script {
-                    boolean valid = validateDeclarativePipeline 'Jenkinsfile'
+                    boolean valid = validateDeclarativePipeline 'jenkins-image.groovy'
                     if (!valid) {
                         currentBuild.result = 'FAILURE'
                         error('VALIDATION ERROR')
