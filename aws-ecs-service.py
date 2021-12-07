@@ -11,7 +11,7 @@ region = "us-west-2"
 #client = boto3.client('ecs')
 client = boto3.client(service_name='ecs', region_name=region)
 response = client.register_task_definition(
-    family='string',
+    family='jenkins',
     containerDefinitions=[
         {
             'image': 'yogeshy01/jenkins:' + BUILD_NUMBER,
@@ -35,24 +35,27 @@ for each in list_services['serviceArns']:
     print(each)
     if service_nm in each:
         print("Deleting the exisitng service")
-        delete_service = client.update_service(cluster=cluster_nm,service=service_nm,desiredCount=1,taskDefinition='jenkins')
-    else:
-        print("Creating container with new image")
-        response = client.create_service(
-            cluster=cluster_nm,
-            serviceName=service_nm,
-            launchType='EC2',
-            taskDefinition='jenkins',
-            desiredCount=1,
-            loadBalancers=[
-                {
-                    'targetGroupArn': 'arn:aws:elasticloadbalancing:us-west-2:200189870863:targetgroup/jenkins-target-group/180a21f703c6096f',
-                    'containerName': 'jenkins',
-                    'containerPort': 8080
-                },
-            ],
-            role='ecs-service-role1',
-        )
+        update_service = client.update_service(cluster=cluster_nm,service=service_nm,desiredCount=1,taskDefinition='jenkins')
+        print(update_service)
+        exit
 
-        print(response)
+
+print("Creating container with new image")
+response = client.create_service(
+    cluster=cluster_nm,
+    serviceName=service_nm,
+    launchType='EC2',
+    taskDefinition='jenkins',
+    desiredCount=1,
+    loadBalancers=[
+        {
+            'targetGroupArn': 'arn:aws:elasticloadbalancing:us-west-2:200189870863:targetgroup/jenkins-target-group/180a21f703c6096f',
+            'containerName': 'jenkins',
+            'containerPort': 8080
+        },
+    ],
+    role='ecs-service-role1',
+)
+
+print(response)
 
