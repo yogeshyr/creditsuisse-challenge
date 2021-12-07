@@ -6,6 +6,15 @@ pipeline {
     }
     agent any
     stages { 
+        stage('Validate pipeline') {
+            steps {
+                checkout([$class: 'GitSCM',
+                        branches                         :[[name: '*/main']],
+                        doGenerateSubmoduleConfigurations: false,
+                        userRemoteConfigs                : [[credentialsId: 'github-reader',url: 'git@github.com:yogeshyr/creditsuisse-challenge.git' ]]
+                ])
+            }
+        }
         stage('Build image') {
             steps {
                 script {
