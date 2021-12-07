@@ -31,5 +31,12 @@ pipeline {
                 }
             }
         }
+        stage('Deploy to AWS ECS'){
+            steps {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awscreds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                    sh "pwd"
+                }
+            }
+        }
     }
 }
