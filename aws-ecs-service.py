@@ -9,7 +9,7 @@ region = "us-west-2"
 
 
 #client = boto3.client('ecs')
-client = boto3.client(service_name='ecs', region_name='us-west-2')
+client = boto3.client(service_name='ecs', region_name=region)
 response = client.register_task_definition(
     family='string',
     containerDefinitions=[
