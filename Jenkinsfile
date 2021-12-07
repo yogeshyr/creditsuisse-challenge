@@ -33,8 +33,8 @@ pipeline {
         }
         stage('Deploy to AWS ECS'){
             steps {
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awscreds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                    sh "pwd"
+                withAWS(credentials: 'awscreds', region: 'us-west-2') {
+                    sh "aws s3 ls"
                 }
             }
         }
