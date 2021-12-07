@@ -33,9 +33,12 @@ pipeline {
         }
         stage('Deploy to AWS ECS'){
             steps {
-                withAWS(credentials: 'awscreds', region: 'us-west-2') {
-                    sh "aws s3 ls"
+                script{
+                    withAWS(credentials: 'awscreds', region: 'us-west-2') {
+                        bat "python --version"
+                    }
                 }
+                
             }
         }
     }
