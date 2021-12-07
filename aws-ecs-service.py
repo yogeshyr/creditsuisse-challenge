@@ -1,6 +1,5 @@
 import boto3
 import sys
-import time
 
 BUILD_NUMBER = sys.argv[1]
 cluster_nm = "jenkins-cluster"
@@ -36,27 +35,24 @@ for each in list_services['serviceArns']:
     print(each)
     if service_nm in each:
         print("Deleting the exisitng service")
-        delete_service = client.delete_service(cluster=cluster_nm,service=service_nm,force=True)
-        time.sleep(120)
+        delete_service = client.update_service(cluster=cluster_nm,service=service_nm,desiredCount=1,taskDefinition='jenkins')
+    else:
+        print("Creating container with new image")
+        response = client.create_service(
+            cluster=cluster_nm,
+            serviceName=service_nm,
+            launchType='EC2',
+            taskDefinition='jenkins',
+            desiredCount=1,
+            loadBalancers=[
+                {
+                    'targetGroupArn': 'arn:aws:elasticloadbalancing:us-west-2:200189870863:targetgroup/jenkins-target-group/180a21f703c6096f',
+                    'containerName': 'jenkins',
+                    'containerPort': 8080
+                },
+            ],
+            role='ecs-service-role1',
+        )
 
-
-
-print("Creating container with new image")
-response = client.create_service(
-    cluster=cluster_nm,
-    serviceName=service_nm,
-    launchType='EC2',
-    taskDefinition='jenkins',
-    desiredCount=1,
-    loadBalancers=[
-        {
-            'targetGroupArn': 'arn:aws:elasticloadbalancing:us-west-2:200189870863:targetgroup/jenkins-target-group/180a21f703c6096f',
-            'containerName': 'jenkins',
-            'containerPort': 8080
-        },
-    ],
-    role='ecs-service-role1',
-)
-
-print(response)
+        print(response)
 
