@@ -6,11 +6,11 @@ BUILD_NUMBER = sys.argv[1]
 cluster_nm = "jenkins-cluster"
 service_nm = "jenkins-service"
 region = "us-west-2"
-boto3.setup_default_session(profile_name='yogesh', region_name='us-west-2')
+#boto3.setup_default_session(profile_name='yogesh', region_name='us-west-2')
 
 
-client = boto3.client('ecs')
-
+#client = boto3.client('ecs')
+client = boto3.client(service_name='ecs', region_name='us-west-2')
 response = client.register_task_definition(
     family='string',
     containerDefinitions=[

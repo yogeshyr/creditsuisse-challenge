@@ -35,7 +35,7 @@ pipeline {
             steps {
                 script{
                     withAWS(credentials: 'awscreds', region: 'us-west-2') {
-                        bat "python --version"
+                        bat "aws-ecs-service.py $BUILD_NUMBER"
                     }
                 }
                 
