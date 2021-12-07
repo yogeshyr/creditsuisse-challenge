@@ -11,7 +11,7 @@ pipeline {
                 checkout([$class: 'GitSCM',
                         branches                         :[[name: '*/main']],
                         doGenerateSubmoduleConfigurations: false,
-                        userRemoteConfigs                : [[credentialsId: 'github-yogeshyr',url: 'git@github.com:yogeshyr/creditsuisse-challenge.git' ]]
+                        userRemoteConfigs                : [[credentialsId: '4ed5cf5a-2058-4347-bdbd-2062ebfbba70',url: 'git@github.com:yogeshyr/creditsuisse-challenge.git' ]]
                 ])
             }
         }
