@@ -37,10 +37,11 @@ for each in list_services['serviceArns']:
     if service_nm in each:
         print("Deleting the exisitng service")
         delete_service = client.delete_service(cluster=cluster_nm,service=service_nm,force=True)
+        time.sleep(90)
 
 
-time.sleep(90)
 
+print("Creating container with new image")
 response = client.create_service(
     cluster=cluster_nm,
     serviceName=service_nm,
@@ -57,4 +58,5 @@ response = client.create_service(
     role='ecs-service-role1',
 )
 
+print(response)
 
