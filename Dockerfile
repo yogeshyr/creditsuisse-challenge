@@ -1,5 +1,5 @@
 FROM jenkins/jenkins:2.323
-LABEL Author="yryadav@gmail.com"
+LABEL Author="yryadav95@gmail.com"
 COPY plugins.txt /usr/share/jenkins/plugins.txt
 RUN jenkins-plugin-cli --plugin-file /usr/share/jenkins/plugins.txt
 ENV JENKINS_USER admin
