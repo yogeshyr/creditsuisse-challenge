@@ -34,9 +34,9 @@ list_services = client.list_services(cluster=cluster_nm,launchType='EC2')
 for each in list_services['serviceArns']:
     print(each)
     if service_nm in each:
-        print("Deleting the exisitng service")
+        print("Updating the exisitng service")
         update_service = client.update_service(cluster=cluster_nm,service=service_nm,desiredCount=1,taskDefinition='jenkins')
-        print(update_service)
+        print("Service updated successfully")
         exit
 
 
@@ -54,7 +54,7 @@ response = client.create_service(
             'containerPort': 8080
         },
     ],
-    role='ecs-service-role1',
+    role='ecs-service-role1'
 )
 
 print(response)
