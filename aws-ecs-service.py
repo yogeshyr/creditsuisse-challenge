@@ -1,7 +1,6 @@
 import boto3
 import sys
 
-
 def register_task(client,BUILD_NUMBER):
     response = client.register_task_definition(
         family='jenkins',
@@ -21,7 +20,7 @@ def register_task(client,BUILD_NUMBER):
             }
         ]
     )
-
+    print(response)
 
 def update_service(client,cluster_nm,service_nm):
     print("Updating the exisitng service")
@@ -72,3 +71,6 @@ def main():
             print(each)
             if service_nm in each:
                 update_service(client,cluster_nm,service_nm)
+
+if __name__ == "__main__":
+    main()
