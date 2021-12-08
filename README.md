@@ -34,11 +34,13 @@ How to run program:
         docker push yogeshy01/jenkins:<version>       -> push docker image into dockerhub.
       - dockerhub link where i pushed the customise jenkins image.
         https://hub.docker.com/repository/docker/yogeshy01/jenkins
+  
   2. Create a pipeline to automate and publish the above image after testing the relevant parts.
       - Used Jenkins tool to automate the task to build and push image into docker hub.
       - I didnt get that what testing needs to be done on this image but as per my understanding and knowledge we can do structure testing on docker images.
         and here I am using base image of jenkins and not doing any structure changes. So i have not added any testing part.
         If we want to do the container level testing then we can run the created image on local host first. Check for any issues with container and then we can               execute the next stage according to results.
+  
   3. Run image on hosted Docker service.
       - I used AWS ECS to deploy jenkins image.
       - AWS ECS is easy to use and we dont need to manage underlying infrastructure. 
@@ -48,6 +50,8 @@ How to run program:
       - Script will check first if the container service is aleredy running or not.
         If its already there then the container will be recreated with new image
          or else it will create new one.
+        Note: In this script, all the variables are static because we have once ECS cluster and only one service to deploy on cluster.
+        In real world/project, we have to pass the parmeters to the script so acording to that we have to made changes in script.
   
 I have created one single jenkins pipeline for all three parts mentioned in problem statement. 
 stages of Jenkinsfile.
@@ -55,5 +59,4 @@ stages of Jenkinsfile.
   2. Build image        -> Build the image from Dockerfile.
   3. Push image         -> Push image to docker hub.
   4. Deploy to AWS ECS  -> Deploy jenkins image to AWS ECS cluster.
-  
 
