@@ -52,6 +52,8 @@ How to run program:
          or else it will create new one.
         Note: In this script, all the variables are static because we have once ECS cluster and only one service to deploy on cluster.
         In real world/project, we have to pass the parmeters to the script so acording to that we have to made changes in script.
+      - Jenkins URL: http://jenkins-elb-144375177.us-west-2.elb.amazonaws.com/
+        Credentials: admin/admin
   
 I have created one single jenkins pipeline for all three parts mentioned in problem statement. 
 stages of Jenkinsfile.
@@ -59,4 +61,5 @@ stages of Jenkinsfile.
   2. Build image        -> Build the image from Dockerfile.
   3. Push image         -> Push image to docker hub.
   4. Deploy to AWS ECS  -> Deploy jenkins image to AWS ECS cluster.
+
 
