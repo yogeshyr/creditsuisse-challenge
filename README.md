@@ -52,7 +52,7 @@ How to run program:
          or else it will create new one.
         Note: In this script, all the variables are static because we have once ECS cluster and only one service to deploy on cluster.
         In real world/project, we have to pass the parmeters to the script so acording to that we have to made changes in script.
-      - Jenkins URL: http://jenkins-elb-144375177.us-west-2.elb.amazonaws.com/
+      - Jenkins URL: http://34.222.117.173/
   
 I have created one single jenkins pipeline for all three parts mentioned in problem statement. 
 stages of Jenkinsfile.
